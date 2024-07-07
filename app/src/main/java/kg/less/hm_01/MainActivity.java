@@ -52,13 +52,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void composeEmail(String email, String subject, String body) {
 
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:" + email));
-
-//        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
+        Intent intent = new Intent(Intent.ACTION_SEND);
+//        intent.setData(Uri.parse("mailto:" + email));
+        intent.setType("message/rfc822");
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         intent.putExtra(Intent.EXTRA_TEXT, body);
-        intent.setType("message/rfc822");
+
 
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
